@@ -1,0 +1,224 @@
+:root {
+    --cyan: #00aeef;
+    --magenta: #ec008c;
+    --yellow: #fff200;
+    --bg-color: #0a0a0a;
+    --text-color: #ffffff;
+    --font-main: 'Outfit', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    overflow-x: hidden;
+}
+
+/* Typography */
+h1,
+h2,
+h3 {
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.section__title {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    margin-bottom: 2rem;
+    color: transparent;
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.5);
+    transition: color 0.3s ease;
+}
+
+.section__title:hover {
+    color: white;
+    -webkit-text-stroke: 2px white;
+}
+
+.wrapper {
+    max-width: 1200px;
+    width: 100%;
+    padding: 0 2rem;
+    z-index: 2;
+}
+
+/* Sections */
+.section {
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Hero Section */
+.hero {
+    flex-direction: column;
+    text-align: center;
+    z-index: 2;
+}
+
+.hero__title {
+    font-size: clamp(4rem, 15vw, 12rem);
+    /* Removed mix-blend-mode: difference as it can cause readability issues on colored backgrounds */
+    color: white;
+    z-index: 10;
+    position: relative;
+    line-height: 0.85;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    /* Added shadow for contrast */
+}
+
+.hero__subtitle {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    margin-top: 2rem;
+    font-weight: 300;
+    letter-spacing: 4px;
+    z-index: 10;
+    text-transform: uppercase;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    /* Added shadow for contrast */
+}
+
+/* Background Shapes */
+.shapes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 0;
+    /* Lower z-index to stay behind everything */
+    pointer-events: none;
+    filter: blur(80px);
+    /* Increased blur for softer background */
+}
+
+.shapes__item {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.5;
+    /* Reduced opacity to make text pop more */
+    /* Removed mix-blend-mode: screen to keep colors solid but transparent */
+}
+
+.shapes__item--cyan {
+    background-color: var(--cyan);
+    width: 50vw;
+    height: 50vw;
+    top: -10%;
+    left: -10%;
+}
+
+.shapes__item--magenta {
+    background-color: var(--magenta);
+    width: 45vw;
+    height: 45vw;
+    top: 20%;
+    right: -10%;
+}
+
+.shapes__item--yellow {
+    background-color: var(--yellow);
+    width: 40vw;
+    height: 40vw;
+    bottom: -10%;
+    left: 20%;
+}
+
+/* About Section */
+.about__text {
+    font-size: clamp(1.5rem, 3vw, 3rem);
+    line-height: 1.4;
+    font-weight: 300;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    /* Added shadow */
+}
+
+.highlight {
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+}
+
+.highlight--cyan {
+    color: var(--cyan);
+}
+
+.highlight--magenta {
+    color: var(--magenta);
+}
+
+.highlight--yellow {
+    color: var(--yellow);
+}
+
+/* Services Section */
+.services__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+}
+
+.services__card {
+    background: rgba(0, 0, 0, 0.6);
+    /* Darker background for cards */
+    padding: 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, background 0.3s ease;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    /* Glassmorphism effect */
+}
+
+.services__card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--cyan);
+}
+
+.services__card:nth-child(2):hover {
+    border-color: var(--magenta);
+}
+
+.services__card:nth-child(3):hover {
+    border-color: var(--yellow);
+}
+
+.services__card-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+/* Contact Section */
+.contact {
+    text-align: center;
+}
+
+.contact__btn {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 1.5rem 4rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--bg-color);
+    background-color: var(--text-color);
+    text-decoration: none;
+    border-radius: 50px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.contact__btn:hover {
+    transform: scale(1.1);
+    background-color: var(--cyan);
+}
