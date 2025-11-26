@@ -53,10 +53,10 @@ gsap.to(".shapes__item--yellow", {
         trigger: "body",
         start: "top top",
         end: "bottom bottom",
-        scrub: 2
+        scrub: 1
     },
-    y: -400,
-    scale: 1.2
+    y: -200,
+    x: 50
 });
 
 // Section Title Reveals
