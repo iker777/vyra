@@ -59,11 +59,37 @@ h3 {
     align-items: center;
 }
 
+/* Intro Wrapper (Zoom Effect) */
+.intro-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.intro-wrapper .section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
 /* Hero Section */
 .hero {
     flex-direction: column;
     text-align: center;
     z-index: 2;
+    background-color: transparent;
+    /* Ensure transparency */
+}
+
+/* About Section */
+.about {
+    z-index: 1;
+    opacity: 0;
+    transform: scale(0.5);
+    background-color: transparent;
 }
 
 .hero__title {
@@ -106,30 +132,26 @@ h3 {
     position: absolute;
     border-radius: 50%;
     opacity: 0.5;
+    width: 800px;
+    height: 800px;
     /* Reduced opacity to make text pop more */
     /* Removed mix-blend-mode: screen to keep colors solid but transparent */
 }
 
 .shapes__item--cyan {
     background-color: var(--cyan);
-    width: 50vw;
-    height: 50vw;
     top: -10%;
     left: -10%;
 }
 
 .shapes__item--magenta {
     background-color: var(--magenta);
-    width: 45vw;
-    height: 45vw;
     top: 20%;
     right: -10%;
 }
 
 .shapes__item--yellow {
     background-color: var(--yellow);
-    width: 40vw;
-    height: 40vw;
     bottom: -10%;
     left: 20%;
 }
@@ -221,4 +243,11 @@ h3 {
 .contact__btn:hover {
     transform: scale(1.1);
     background-color: var(--cyan);
+}
+
+@media (max-width: 1600px) {
+    .shapes__item {
+        width: 60vh;
+        height: 60vh;
+    }
 }

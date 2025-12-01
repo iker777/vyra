@@ -10,54 +10,50 @@ tl.from(".shapes__item", {
     stagger: 0.2,
     ease: "power3.out"
 })
-    .from(".hero__title", {
-        duration: 1.5,
-        y: 100,
+// Zoom Transition (Hero -> About)
+const zoomTl = gsap.timeline({
+    scrollTrigger: {
+        trigger: ".intro-wrapper",
+        pin: true,
+        start: "top top",
+        end: "+=150%", // Scroll distance for the animation
+        scrub: true
+    }
+});
+
+zoomTl.to(".hero__title", {
+    scale: 50, // Zoom in massively
+    opacity: 0,
+    duration: 1,
+    ease: "power2.in"
+}, 0)
+    .to(".hero__subtitle", {
         opacity: 0,
-        ease: "power4.out"
-    }, "-=1.5")
-    .from(".hero__subtitle", {
+        duration: 0.5
+    }, 0)
+    .to(".about", {
+        opacity: 1,
+        scale: 1,
         duration: 1,
-        y: 20,
-        opacity: 0,
         ease: "power2.out"
-    }, "-=1");
+    }, 0.5); // Start slightly after hero starts zooming
 
-// Scroll Animations for Shapes - Parallax Effect
-gsap.to(".shapes__item--cyan", {
-    scrollTrigger: {
-        trigger: "body",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1
-    },
-    y: 300,
-    x: 100,
-    rotation: 45
-});
+// Independent Floating Shapes Animation
+function floatShape(selector) {
+    gsap.to(selector, {
+        x: "random(-100, 100)", // Random movement range
+        y: "random(-100, 100)",
+        rotation: "random(-180, 180)",
+        duration: "random(10, 20)", // Slow, relaxing speed
+        ease: "sine.inOut",
+        onComplete: () => floatShape(selector) // Loop indefinitely with new random values
+    });
+}
 
-gsap.to(".shapes__item--magenta", {
-    scrollTrigger: {
-        trigger: "body",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1.5
-    },
-    y: -200,
-    x: -100,
-    rotation: -45
-});
-
-gsap.to(".shapes__item--yellow", {
-    scrollTrigger: {
-        trigger: "body",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1
-    },
-    y: -200,
-    x: 50
-});
+// Start floating animations for each shape
+floatShape(".shapes__item--cyan");
+floatShape(".shapes__item--magenta");
+floatShape(".shapes__item--yellow");
 
 // Section Title Reveals
 gsap.utils.toArray('.section__title').forEach(title => {
