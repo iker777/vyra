@@ -92,7 +92,8 @@ gsap.from(".services__card", {
     opacity: 0,
     duration: 0.8,
     stagger: 0.2,
-    ease: "back.out(1.7)"
+    ease: "back.out(1.7)",
+    clearProps: "all"
 });
 
 // Contact Button Pulse
@@ -102,4 +103,35 @@ gsap.to(".contact__btn", {
     repeat: -1,
     yoyo: true,
     ease: "sine.inOut"
+});
+
+// Spotlight Interaction
+const cards = document.querySelectorAll('.services__card');
+const spotlights = document.querySelectorAll('.work-spotlight');
+
+cards.forEach(card => {
+    card.addEventListener('click', () => {
+        const targetId = card.getAttribute('data-target');
+        const targetSpotlight = document.getElementById(targetId);
+
+        // Close any open spotlights first
+        spotlights.forEach(s => s.classList.remove('is-active'));
+
+        // Activate the clicked spotlight
+        if (targetSpotlight) {
+            targetSpotlight.classList.add('is-active');
+
+            // Optional: Add a "click" animation to the card
+            gsap.fromTo(card, { scale: 0.95 }, { scale: 1, duration: 0.3, ease: "back.out(1.7)" });
+        }
+    });
+});
+
+// Close spotlight when clicking outside (on the spotlight background)
+spotlights.forEach(spotlight => {
+    spotlight.addEventListener('click', (e) => {
+        if (e.target === spotlight || e.target.classList.contains('spotlight-effect')) {
+            spotlight.classList.remove('is-active');
+        }
+    });
 });

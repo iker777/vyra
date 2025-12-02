@@ -200,6 +200,11 @@ h3 {
     cursor: pointer;
     backdrop-filter: blur(10px);
     /* Glassmorphism effect */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    /* Ensure they fill the grid cell */
 }
 
 .services__card:hover {
@@ -209,11 +214,11 @@ h3 {
 }
 
 .services__card:nth-child(2):hover {
-    border-color: var(--magenta);
+    border-color: var(--yellow);
 }
 
 .services__card:nth-child(3):hover {
-    border-color: var(--yellow);
+    border-color: var(--magenta);
 }
 
 .services__card-title {
@@ -250,4 +255,99 @@ h3 {
         width: 60vh;
         height: 60vh;
     }
+}
+
+/* Spotlight Effect */
+.work-spotlight {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 5;
+    /* Above background shapes, below content if needed, or above everything */
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Darken background aggressively */
+    backdrop-filter: blur(5px);
+    /* Optional: blur the content behind */
+}
+
+.work-spotlight.is-active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 20;
+    /* Bring to front when active */
+}
+
+.spotlight-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vmax;
+    height: 100vmax;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.95) 60%);
+    pointer-events: none;
+    mix-blend-mode: screen;
+    /* Or hard-light depending on desired effect */
+}
+
+/* Specific Spotlight Colors */
+#diseno .spotlight-effect {
+    background: radial-gradient(circle, var(--cyan) 0%, transparent 70%);
+    opacity: 0.6;
+}
+
+#branding .spotlight-effect {
+    background: radial-gradient(circle, var(--yellow) 0%, transparent 70%);
+    opacity: 0.6;
+}
+
+#estrategia .spotlight-effect {
+    background: radial-gradient(circle, var(--magenta) 0%, transparent 70%);
+    opacity: 0.6;
+}
+
+.spotlight-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.5s ease 0.2s;
+    /* Delay for content reveal */
+}
+
+.work-spotlight.is-active .spotlight-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.spotlight-content h3 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.spotlight-content p {
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+/* Close overlay (optional, for clicking outside) */
+.spotlight-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1;
 }
