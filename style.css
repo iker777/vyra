@@ -4,7 +4,16 @@
     --yellow: #fff200;
     --bg-color: #0a0a0a;
     --text-color: #ffffff;
-    --font-main: 'Outfit', sans-serif;
+    --font-outfit: 'Outfit', sans-serif;
+    --font-sohne: 'Sohne', sans-serif;
+}
+
+@font-face {
+    font-family: 'Sohne';
+    src: url('fonts/Sohne-Buch.woff') format('woff');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
 }
 
 * {
@@ -16,7 +25,7 @@
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
-    font-family: var(--font-main);
+    font-family: var(--font-outfit);
     overflow-x: hidden;
 }
 
@@ -31,13 +40,14 @@ h3 {
 
 .section__title {
     font-size: clamp(2.5rem, 6vw, 5rem);
+    text-align: center;
     margin-bottom: 2rem;
     color: transparent;
     -webkit-text-stroke: 2px rgba(255, 255, 255, 0.5);
     transition: color 0.3s ease;
 }
 
-.section__title:hover {
+.section__title.is-active {
     color: white;
     -webkit-text-stroke: 2px white;
 }
@@ -47,6 +57,23 @@ h3 {
     width: 100%;
     padding: 0 2rem;
     z-index: 2;
+}
+
+/* Logo Styles */
+.logo-link {
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    z-index: 100;
+    /* mix-blend-mode: difference; Removed as we are using white logo */
+    transition: transform 0.3s ease;
+    display: block;
+}
+
+.logo__svg {
+    width: 80px;
+    height: auto;
+    display: block;
 }
 
 /* Sections */
@@ -94,11 +121,13 @@ h3 {
 
 .hero__title {
     font-size: clamp(4rem, 15vw, 12rem);
+    font-family: var(--font-sohne);
     /* Removed mix-blend-mode: difference as it can cause readability issues on colored backgrounds */
     color: white;
     z-index: 10;
     position: relative;
     line-height: 0.85;
+    letter-spacing: 8px;
     text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     /* Added shadow for contrast */
 }
@@ -350,4 +379,222 @@ h3 {
     height: 100%;
     background: rgba(0, 0, 0, 0.8);
     z-index: 1;
+}
+
+/* How We Do Section */
+.how-we-do {
+    height: 100vh;
+    overflow: hidden;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+}
+
+.how-we-do__wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Removed padding-left to handle centering in container */
+}
+
+.how-we-do .section__title {
+    margin-bottom: 4rem;
+    padding-left: 2rem;
+}
+
+.how-we-do__container {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 40vw;
+    /* Increased gap to hide next card */
+    width: max-content;
+    padding-right: 20vw;
+    padding-left: 20vw;
+    /* Center the first card (100vw - 60vw) / 2 = 20vw */
+    margin-top: 4rem;
+}
+
+/* Timeline Styles */
+.how-we-do__timeline {
+    position: relative;
+    width: 60vw;
+    /* Match card width */
+    margin: 0 auto 2rem auto;
+    /* Center horizontally */
+}
+
+.timeline-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.timeline-progress {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: white;
+    /* White progress line */
+    transform: translateY(-50%);
+    z-index: 2;
+    transition: width 0.1s linear;
+}
+
+.timeline-dots {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    z-index: 3;
+    width: 100%;
+}
+
+.timeline-dot {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--bg-color);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    font-family: var(--font-sohne);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.timeline-dot:hover,
+.timeline-dot.is-active {
+    transform: scale(1.2);
+}
+
+/* Specific Dot Colors */
+.timeline-dot:nth-child(1):hover,
+.timeline-dot:nth-child(1).is-active {
+    background: var(--cyan);
+    border-color: var(--cyan);
+}
+
+.timeline-dot:nth-child(2):hover,
+.timeline-dot:nth-child(2).is-active {
+    background: var(--yellow);
+    border-color: var(--yellow);
+    color: black;
+    /* Better contrast for yellow */
+}
+
+.timeline-dot:nth-child(3):hover,
+.timeline-dot:nth-child(3).is-active {
+    background: var(--magenta);
+    border-color: var(--magenta);
+}
+
+.timeline-dot:nth-child(4):hover,
+.timeline-dot:nth-child(4).is-active {
+    background: var(--cyan);
+    border-color: var(--cyan);
+}
+
+.how-we-do__card {
+    width: 60vw;
+    height: 60vh;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    border-radius: 20px;
+    flex-shrink: 0;
+}
+
+.how-we-do__card:hover {
+    /* Removed transform: translateY(-10px); */
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--cyan);
+}
+
+.how-we-do__card:nth-child(2):hover {
+    border-color: var(--yellow);
+}
+
+.how-we-do__card:nth-child(3):hover {
+    border-color: var(--magenta);
+}
+
+.how-we-do__card:nth-child(4):hover {
+    border-color: var(--cyan);
+}
+
+.how-we-do__step {
+    font-size: 4rem;
+    font-weight: 900;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+    font-family: var(--font-sohne);
+}
+
+.how-we-do__title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.how-we-do__desc {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 300;
+}
+
+@media (max-width: 768px) {
+    .how-we-do__card {
+        width: 85vw;
+        height: 50vh;
+        padding: 2rem;
+    }
+
+    .how-we-do__container {
+        gap: 10vw;
+        padding-right: 10vw;
+        padding-left: 7.5vw;
+        /* (100vw - 85vw) / 2 = 7.5vw */
+    }
+
+    .how-we-do__timeline {
+        width: 85vw;
+        /* Match mobile card width */
+        margin: 0 auto 2rem auto;
+        /* Ensure centering on mobile */
+    }
+
+    .timeline-dot {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+
+    .how-we-do__step {
+        font-size: 3rem;
+    }
+
+    .how-we-do__title {
+        font-size: 2rem;
+    }
+
+    .how-we-do__desc {
+        font-size: 1rem;
+    }
 }

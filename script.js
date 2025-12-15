@@ -135,3 +135,58 @@ spotlights.forEach(spotlight => {
         }
     });
 });
+
+// Horizontal Scroll for "Cómo lo hacemos"
+const howWeDoSection = document.querySelector('.how-we-do');
+const howWeDoContainer = document.querySelector('.how-we-do__container');
+const timelineProgress = document.querySelector('.timeline-progress');
+const timelineDots = document.querySelectorAll('.timeline-dot');
+
+if (howWeDoSection && howWeDoContainer) {
+    const totalScroll = howWeDoContainer.scrollWidth - window.innerWidth; // Scroll full width including padding
+
+    const scrollTween = gsap.to(howWeDoContainer, {
+        x: () => -totalScroll,
+        ease: "none",
+        scrollTrigger: {
+            trigger: howWeDoSection,
+            pin: true,
+            scrub: 1,
+            start: "top top",
+            end: () => "+=" + (totalScroll * 2), // Increase scroll duration/distance
+            invalidateOnRefresh: true,
+            onUpdate: (self) => {
+                // Update timeline progress
+                const progress = self.progress * 100;
+                if (timelineProgress) {
+                    timelineProgress.style.width = `${progress}%`;
+                }
+
+                // Update active dot
+                timelineDots.forEach((dot, index) => {
+                    const dotProgress = index / (timelineDots.length - 1);
+                    // Simple logic: if progress is close to dot position
+                    if (Math.abs(self.progress - dotProgress) < 0.1) {
+                        dot.classList.add('is-active');
+                    } else {
+                        dot.classList.remove('is-active');
+                    }
+                });
+            }
+        }
+    });
+
+    // Click on dots to scroll
+    timelineDots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            const progress = index / (timelineDots.length - 1);
+            const scrollPos = howWeDoSection.offsetTop + (progress * totalScroll);
+
+            gsap.to(window, {
+                scrollTo: scrollPos,
+                duration: 1,
+                ease: "power2.out"
+            });
+        });
+    });
+}
