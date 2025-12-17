@@ -4,6 +4,7 @@
     --yellow: #fff200;
     --bg-color: #0a0a0a;
     --text-color: #ffffff;
+    --font-outfit-900: 'Outfit-900', sans-serif;
     --font-outfit: 'Outfit', sans-serif;
     --font-sohne: 'Sohne', sans-serif;
 }
@@ -15,7 +16,20 @@
     font-style: normal;
     font-display: swap;
 }
-
+@font-face {
+    font-family: 'Outfit-900';
+    src: url('fonts/Outfit-ExtraBold.ttf') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Outfit';
+    src: url('fonts/Outfit-Regular.ttf') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
 * {
     margin: 0;
     padding: 0;
@@ -33,6 +47,7 @@ body {
 h1,
 h2,
 h3 {
+    font-family: var(--font-outfit-900);
     font-weight: 900;
     text-transform: uppercase;
     line-height: 1;
